@@ -1,0 +1,27 @@
+{
+  "name": "its-background-job",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zidane9/its-background-job.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zidane9/its-background-job/issues"
+  },
+  "homepage": "https://github.com/zidane9/its-background-job#readme",
+  "dependencies": {
+    "cors": "^2.8.3",
+    "cron": "^1.2.1",
+    "express": "^4.15.2",
+    "kue": "^0.11.5",
+    "mongoose": "^4.9.4"
+  }
+}

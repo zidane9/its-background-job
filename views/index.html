@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Worker Time Table</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@2.2.6" charset="utf-8"></script>
+
+  </head>
+  <body >
+    <div id="app">
+      <div>
+        Worker ID: <input type="text" v-model="workerid">
+        <button @click="workIn">In</button>
+        <button @click="workOut">Out</button>
+      </div>
+      <br>
+    <table v-if="workers.length > 0" border ="1" >
+      <thead>
+        <tr>
+          <td>ID</td><td>Name</td><td>Phone</td><td>Work Time(Minutes)</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for= "worker in workers">
+          <td>{{worker.workerid}}</td>
+          <td>{{worker.name}}</td>
+          <td>{{worker.phone}}</td>
+          <td>{{worker.minutesWork}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+    <script type="text/javascript">
+    // $(function() {
+    //     startRefresh();
+    // });
+    //
+    // function startRefresh() {
+    //     setTimeout(startRefresh,60000);
+    //     // $.get('pagelink.php', function(data) {
+    //     //     $('#content_div_id').html(data);
+    //     // });
+    //     app.getAllWorker();
+    // }
+
+      let app = new Vue({
+        el: '#app',
+        data: {
+          workers: [],
+          workerid: null
+        },
+        methods: {
+          getAllWorker: function(){
+            axios.get('http://localhost:3000/workers')
+            .then(function (response) {
+              // console.log('----',response.data);
+              app.workers = response.data
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          },
+          workIn: function(){
+            // console.log('----',this.workerid);
+            axios.get('http://localhost:3000/workers/worktime/'+this.workerid)
+            .then(function (response) {
+
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          },
+          workOut: function(){
+            axios.get('http://localhost:3000/workers/stoptime/'+this.workerid)
+            .then(function (response) {
+
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          },
+          startRefresh: function(){
+            setTimeout(this.startRefresh,60000);
+            this.getAllWorker();
+          }
+        },
+        mounted: function(){
+          this.startRefresh();
+        }
+      })
+    </script>
+  </body>
+</html>
